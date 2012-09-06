@@ -2,3 +2,9 @@
 .actionScriptProperties
 .project
 bin
+/test\empty_branch_issue/.flexProperties
+/test\empty_branch_issue/.project
+/test\empty_branch_issue/.settings
+/test\empty_branch_issue/bin-debug
+/test\empty_branch_issue/html-template
+/test\empty_branch_issue/.actionScriptProperties

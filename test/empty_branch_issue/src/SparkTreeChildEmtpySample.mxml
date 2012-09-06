@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:sparkTree="com.sparkTree.*"
+			   creationComplete="application1_creationCompleteHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import data.Item;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			[Bindable]
+			private var data:ArrayCollection;
+			
+			private var rootData:Item;
+			private var child1:Item;
+			private var child1_1:Item;
+			private var child1_1_1:Item;
+			
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				rootData =  new Item("root");
+				child1 =  new Item("child1");
+				child1_1 = new Item("child1-1");
+				child1_1_1 = new Item("child1_1_1");
+				var leaf:Item = new Item("leaf");
+				var child2:Item = new Item("child2");
+				
+				rootData.add(child1);
+				rootData.add(child2);
+
+				child1.add(child1_1);
+				child1_1.add(child1_1_1);
+				child1_1_1.add(leaf);
+				
+				
+				data = new ArrayCollection([rootData]);
+				
+				tree.expandItem(rootData);
+				tree.expandItem(child1);
+				tree.expandItem(child1_1);
+				tree.expandItem(child1_1_1);
+			}
+			
+			protected function remove_clickHandler(event:MouseEvent):void
+			{
+				child1.remove(child1_1);
+			}
+			
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	<sparkTree:Tree id="tree" dataProvider="{data}" dragEnabled="true" dropEnabled="true" width="100%" height="100%" />
+	
+	<s:Button label="remove child1_1 from child_1" click="remove_clickHandler(event)" />
+</s:Application>
